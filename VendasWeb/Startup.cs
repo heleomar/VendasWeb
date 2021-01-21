@@ -28,7 +28,8 @@ namespace VendasWeb
             services.AddControllersWithViews();
 
             services.AddDbContext<VendasWebContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("VendasWebContext")));
+                    options.UseMySql(Configuration.GetConnectionString("VendasWebContext"), builder =>
+builder.MigrationsAssembly("VendasWeb")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

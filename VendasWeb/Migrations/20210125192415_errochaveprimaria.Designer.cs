@@ -9,8 +9,8 @@ using VendasWeb.Data;
 namespace VendasWeb.Migrations
 {
     [DbContext(typeof(VendasWebContext))]
-    [Migration("20210121202557_OutrasEntidades")]
-    partial class OutrasEntidades
+    [Migration("20210125192415_errochaveprimaria")]
+    partial class errochaveprimaria
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -67,7 +67,7 @@ namespace VendasWeb.Migrations
                     b.Property<DateTime>("DataNascimeto")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("DepartamentoId")
+                    b.Property<int>("DepartamentoId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -97,7 +97,9 @@ namespace VendasWeb.Migrations
                 {
                     b.HasOne("VendasWeb.Models.Departamento", "Departamento")
                         .WithMany("Vendedores")
-                        .HasForeignKey("DepartamentoId");
+                        .HasForeignKey("DepartamentoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

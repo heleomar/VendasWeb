@@ -95,7 +95,7 @@ namespace VendasWeb.Migrations
 
             modelBuilder.Entity("VendasWeb.Models.Vendedor", b =>
                 {
-                    b.HasOne("VendasWeb.Models.Departamento", "Derpartamento")
+                    b.HasOne("VendasWeb.Models.Departamento", "Departamento")
                         .WithMany("Vendedores")
                         .HasForeignKey("DepartamentoId")
                         .OnDelete(DeleteBehavior.Cascade)

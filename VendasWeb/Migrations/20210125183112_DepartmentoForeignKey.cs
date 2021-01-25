@@ -7,15 +7,15 @@ namespace VendasWeb.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Vendedor_Departamento_DerpartamentoId",
+                name: "FK_Vendedor_Departamento_DepartamentoId",
                 table: "Vendedor");
 
             migrationBuilder.DropIndex(
-                name: "IX_Vendedor_DerpartamentoId",
+                name: "IX_Vendedor_DepartamentoId",
                 table: "Vendedor");
 
             migrationBuilder.DropColumn(
-                name: "DerpartamentoId",
+                name: "DepartamentoId",
                 table: "Vendedor");
 
             migrationBuilder.AddColumn<int>(
@@ -53,20 +53,20 @@ namespace VendasWeb.Migrations
                 table: "Vendedor");
 
             migrationBuilder.AddColumn<int>(
-                name: "DerpartamentoId",
+                name: "DepartamentoId",
                 table: "Vendedor",
                 type: "int",
                 nullable: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vendedor_DerpartamentoId",
+                name: "IX_Vendedor_DepartamentoId",
                 table: "Vendedor",
-                column: "DerpartamentoId");
+                column: "DepartamentoId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Vendedor_Departamento_DerpartamentoId",
+                name: "FK_Vendedor_Departamento_DepartamentoId",
                 table: "Vendedor",
-                column: "DerpartamentoId",
+                column: "DepartamentoId",
                 principalTable: "Departamento",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);

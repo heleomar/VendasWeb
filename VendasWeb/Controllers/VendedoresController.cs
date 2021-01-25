@@ -5,16 +5,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using VendasWeb.Models;
 using VendasWeb.Services;
+using VendasWeb.Models.ViewsModels;
 
 namespace VendasWeb.Controllers
 {
     public class VendedoresController : Controller
     {
-        public readonly VendedorService _vendedorService;
+        private readonly VendedorService _vendedorService;
+        private readonly DepartamentoService _departamentoService;
 
-        public VendedoresController(VendedorService vendedorService)
+        public VendedoresController(VendedorService vendedorService, DepartamentoService departamentoService)
         {
             _vendedorService = vendedorService;
+            _departamentoService = departamentoService;
         }
 
         public IActionResult Index()
@@ -25,7 +28,9 @@ namespace VendasWeb.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            var departamentos = _departamentoService.FindAll();
+            var viewModel = new VendedorFormViewModel { Departamentos = departamentos };
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -34,6 +39,28 @@ namespace VendasWeb.Controllers
         public IActionResult Create(Vendedor vendendor)
         {
             _vendedorService.Insert(vendendor);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var obj = _vendedorService.FindById(id.Value);
+            if(obj == null)
+            {
+                return NotFound();
+            }
+            return View(obj);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            _vendedorService.Remove(id);
             return RedirectToAction(nameof(Index));
         }
     }

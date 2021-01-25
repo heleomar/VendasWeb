@@ -12,7 +12,9 @@ namespace VendasWeb.Models
         public string Email { get; set; }
         public DateTime DataNascimeto { get; set; }
         public double SalarioBase { get; set; }
-        public Departamento Derpartamento { get; set; }
+        public Departamento Departamento { get; set; }
+        public int DepartamentoId { get; set; }
+
         public ICollection<RegistroVendas> Vendas { get; set; } = new List<RegistroVendas>();
 
         public Vendedor()
@@ -20,14 +22,14 @@ namespace VendasWeb.Models
 
         }
 
-        public Vendedor(int id, string nome, string email, DateTime dataNascimeto, double salarioBase, Departamento derpartamento)
+        public Vendedor(int id, string nome, string email, DateTime dataNascimeto, double salarioBase, Departamento departamento)
         {
             Id = id;
             Nome = nome;
             Email = email;
             DataNascimeto = dataNascimeto;
             SalarioBase = salarioBase;
-            Derpartamento = derpartamento;
+            Departamento = departamento;
         }
 
         public void AddVendas(RegistroVendas rv)

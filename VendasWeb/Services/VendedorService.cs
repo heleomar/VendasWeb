@@ -22,5 +22,11 @@ namespace VendasWeb.Services
             return _context.Vendedor.ToList();
         }
 
+        public void Insert(Vendedor obj)
+        {
+            _context.Add(obj);
+            _context.SaveChanges();
+        }
+
     }
 }

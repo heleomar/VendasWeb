@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using VendasWeb.Data;
 using VendasWeb.Models;
 using Microsoft.EntityFrameworkCore;
-
+using VendasWeb.Services.Exceptions;
 
 namespace VendasWeb.Services
 {
@@ -40,6 +40,23 @@ namespace VendasWeb.Services
             var obj = _context.Vendedor.Find(id);
             _context.Vendedor.Remove(obj);
             _context.SaveChanges();
+        }
+
+        public void Update(Vendedor obj)
+        {
+            if (!_context.Vendedor.Any(x => x.Id == obj.Id))
+            {
+                throw new NotFoundException("Id not found");
+            }
+            try
+            {
+                _context.Update(obj);
+                _context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                throw new DbConcurrencyException(e.Message);
+            }
         }
 
     }

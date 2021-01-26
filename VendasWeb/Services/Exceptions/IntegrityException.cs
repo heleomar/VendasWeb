@@ -12,4 +12,4 @@ namespace VendasWeb.Services.Exceptions
         }
     }
 }
-}
+
